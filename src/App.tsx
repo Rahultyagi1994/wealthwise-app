@@ -2,6 +2,24 @@ import { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { UserProfile, Investment, Goal } from './types';
 
+// Logo Component - $$$ with Upward Arrows
+function Logo({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
+  const sizes = {
+    sm: { container: 'w-10 h-10', dollar: 'text-sm', arrow: 'text-[8px]' },
+    md: { container: 'w-16 h-16', dollar: 'text-xl', arrow: 'text-xs' },
+    lg: { container: 'w-20 h-20', dollar: 'text-2xl', arrow: 'text-sm' }
+  };
+
+  return (
+    <div className={`${sizes[size].container} bg-gradient-to-br from-emerald-400 via-emerald-500 to-cyan-500 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/30`}>
+      <div className="flex flex-col items-center justify-center text-white font-bold leading-none">
+        <span className={`${sizes[size].arrow} mb-[-2px] tracking-wider`}>↑↑↑</span>
+        <span className={`${sizes[size].dollar} tracking-tight`}>$$$</span>
+      </div>
+    </div>
+  );
+}
+
 // Auth Page Component
 function AuthPage() {
   const { signIn, signUp, resetPassword } = useAuth();
@@ -52,8 +70,8 @@ function AuthPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-2xl mb-4">
-            <span className="text-white font-bold text-2xl">W</span>
+          <div className="inline-flex items-center justify-center mb-4">
+            <Logo size="md" />
           </div>
           <h1 className="text-3xl font-bold text-white">WealthWise</h1>
           <p className="text-slate-400 mt-2">Your AI-Powered Financial Advisor</p>
@@ -262,8 +280,16 @@ function AppContent() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-emerald-400">Loading WealthWise...</p>
+          <div className="relative mx-auto mb-4">
+            <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 via-emerald-500 to-cyan-500 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/30 animate-pulse">
+              <div className="flex flex-col items-center justify-center text-white font-bold leading-none">
+                <span className="text-sm mb-[-2px] tracking-wider">↑↑↑</span>
+                <span className="text-2xl tracking-tight">$$$</span>
+              </div>
+            </div>
+            <div className="absolute -inset-2 bg-emerald-500/20 rounded-3xl animate-ping" />
+          </div>
+          <p className="text-emerald-400 font-medium">Loading WealthWise...</p>
         </div>
       </div>
     );
@@ -450,9 +476,7 @@ function MainApp() {
       <header className="bg-slate-800/50 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-lg">W</span>
-            </div>
+            <Logo size="sm" />
             <span className="text-xl font-bold text-white">WealthWise</span>
           </div>
 
@@ -474,20 +498,7 @@ function MainApp() {
             ))}
           </nav>
 
-          {/* Connection Status & Debug */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setShowDebugPanel(!showDebugPanel)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium ${
-                isOnline 
-                  ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' 
-                  : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-              }`}
-            >
-              <div className={`w-2 h-2 rounded-full ${isOnline ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'}`} />
-              {isOnline ? 'Cloud' : 'Local'}
-            </button>
-          </div>
+          {/* Cloud status removed */}
 
           {/* User Menu */}
           <div className="relative">
