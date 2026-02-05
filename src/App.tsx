@@ -705,41 +705,41 @@ function DashboardView({
       </div>
 
       {/* Health Score Card */}
-      <div className="bg-gradient-to-r from-emerald-600 to-cyan-600 rounded-2xl p-6 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20" />
-        <div className="relative flex items-center gap-6">
-          <div className="relative w-32 h-32">
+      <div className="bg-gradient-to-r from-emerald-600 to-cyan-600 rounded-2xl p-4 sm:p-6 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-32 h-32 sm:w-40 sm:h-40 bg-white/10 rounded-full -mr-16 -mt-16 sm:-mr-20 sm:-mt-20" />
+        <div className="relative flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+          <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0">
             <svg className="w-full h-full transform -rotate-90">
-              <circle cx="64" cy="64" r="56" stroke="rgba(255,255,255,0.2)" strokeWidth="12" fill="none" />
+              <circle cx="50%" cy="50%" r="45%" stroke="rgba(255,255,255,0.2)" strokeWidth="10" fill="none" />
               <circle
-                cx="64" cy="64" r="56"
+                cx="50%" cy="50%" r="45%"
                 stroke="white"
-                strokeWidth="12"
+                strokeWidth="10"
                 fill="none"
                 strokeLinecap="round"
-                strokeDasharray={`${healthScore.overall * 3.52} 352`}
+                strokeDasharray={`${healthScore.overall * 2.83} 283`}
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center">
-                <div className="text-3xl font-bold text-white">{healthScore.overall}</div>
-                <div className="text-white/70 text-xs">Health Score</div>
+                <div className="text-2xl sm:text-3xl font-bold text-white">{healthScore.overall}</div>
+                <div className="text-white/70 text-[10px] sm:text-xs">Health Score</div>
               </div>
             </div>
           </div>
-          <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div className="flex-1 w-full grid grid-cols-2 gap-2 sm:gap-3">
             {[
               { label: 'Savings', score: healthScore.savings, icon: '💰' },
               { label: 'Emergency', score: healthScore.emergency, icon: '🛡️' },
               { label: 'Investing', score: healthScore.investing, icon: '📈' },
               { label: 'Goals', score: healthScore.goals, icon: '🎯' },
             ].map(item => (
-              <div key={item.label} className="bg-white/10 rounded-xl p-3">
-                <div className="flex items-center gap-2 mb-1">
-                  <span>{item.icon}</span>
-                  <span className="text-white/80 text-sm">{item.label}</span>
+              <div key={item.label} className="bg-white/10 rounded-lg sm:rounded-xl p-2 sm:p-3">
+                <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                  <span className="text-sm">{item.icon}</span>
+                  <span className="text-white/80 text-xs sm:text-sm truncate">{item.label}</span>
                 </div>
-                <div className="text-white font-bold">{item.score}%</div>
+                <div className="text-white font-bold text-sm sm:text-base">{item.score}%</div>
               </div>
             ))}
           </div>
