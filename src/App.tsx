@@ -652,6 +652,9 @@ function MainApp() {
           onClose={() => setShowDebugPanel(false)}
         />
       )}
+
+      {/* Footer Credit */}
+      <FooterCredit />
     </div>
   );
 }
@@ -2583,5 +2586,19 @@ function DebugPanel({
     </div>
   );
 }
+
+// Footer Credit Component
+const FooterCredit = () => (
+  <div className="fixed bottom-4 right-4 z-40">
+    <div className="bg-slate-800/90 backdrop-blur-sm border border-slate-700 rounded-lg px-3 py-2 shadow-lg">
+      <p className="text-xs text-slate-400">
+        Designed & Developed by{' '}
+        <span className="text-emerald-400 font-semibold">Rahul</span>
+        {' & '}
+        <span className="text-emerald-400 font-semibold">Anuj</span>
+      </p>
+    </div>
+  </div>
+);
 
 export default App;
